@@ -25,14 +25,18 @@ const Header = ({ isSidebar, setSidebar, setLogin, isLogin }) => {
             display={isSidebar ? "none" : "block"}
             color={"#fff"}
           />
-          <Text fontSize={"3xl"} fontWeight={"bold"} color={"#fff"}>
+          <Text
+            fontSize={{ base: "2xl", md: "3xl" }}
+            fontWeight={"bold"}
+            color={"#fff"}
+          >
             System Title
           </Text>
         </Flex>
         <Box>
           <Menu>
             <MenuButton>
-              <Avatar size={"md"} src="https://bit.ly/dan-abramov" />
+              <Avatar src="https://bit.ly/dan-abramov" />
             </MenuButton>
             <MenuList>
               <MenuItem icon={<SettingsIcon />}>Setting</MenuItem>

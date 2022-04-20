@@ -21,3 +21,27 @@ a.active .accordionLink:hover{
 .breadCrumb.active{
     font-weight: bold;
 }
+
+/* @keyframes scale-display {
+	0% {
+		opacity: 0;
+        width: 0%;
+	}
+
+	100% {
+		opacity: 1;
+        width: 100%;
+
+	}
+}
+
+@keyframes scale-display--reversed {
+	0% {
+		display: inline-flex;
+        width: 100%;
+	}
+	100% {
+		display: none;
+		width: 0%;
+	}
+} */
