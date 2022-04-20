@@ -21,15 +21,22 @@ import TeamRed from "./pages/TeamsAccordion/TeamRed";
 import TeamBlue from "./pages/TeamsAccordion/TeamBlue";
 import TeamGreen from "./pages/TeamsAccordion/TeamGreen";
 
+//React Query
+import { QueryClientProvider, QueryClient } from "react-query";
+
 function App() {
+  const queryClient = new QueryClient();
+
   const [isSidebar, setSidebar] = useState(true);
-  const [isLogin, setLogin] = useState(false);
+  const [isLogin, setLogin] = useState(true);
 
   return (
     <Flex h={"100vh"} overflow={"hidden"} pos={"relative"}>
       {isLogin ? (
         <>
-          <Sidebar isSidebar={isSidebar} setSidebar={setSidebar} />
+          <QueryClientProvider client={queryClient}>
+            <Sidebar isSidebar={isSidebar} setSidebar={setSidebar} />
+          </QueryClientProvider>
           <Box
             w={"100%"}
             display={{
