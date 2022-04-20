@@ -23,7 +23,7 @@ import TeamGreen from "./pages/TeamsAccordion/TeamGreen";
 
 function App() {
   const [isSidebar, setSidebar] = useState(true);
-  const [isLogin, setLogin] = useState(true);
+  const [isLogin, setLogin] = useState(false);
 
   return (
     <Flex h={"100vh"} overflow={"hidden"} pos={"relative"}>
