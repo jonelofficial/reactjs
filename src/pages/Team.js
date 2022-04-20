@@ -3,22 +3,17 @@ import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import Schema from "../Schema";
 
 const Team = () => {
-  const schema = yup.object().shape({
-    firstName: yup.string().required().min(10),
-    lastName: yup.string().required(),
-  });
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
     mode: "onTouched",
-    resolver: yupResolver(schema),
+    resolver: yupResolver(Schema),
   });
 
   const onSubmit = handleSubmit((data) => console.log(data));
