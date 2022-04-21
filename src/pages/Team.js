@@ -6,7 +6,7 @@ import {
   Heading,
   Progress,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { createContext, useState } from "react";
 
 import Step1 from "../pages/Teams/Step1";
 import Step2 from "../pages/Teams/Step2";
@@ -14,6 +14,15 @@ import Step3 from "../pages/Teams/Step3";
 
 const Team = () => {
   const [page, setPage] = useState(1);
+  const [formState, setFormState] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phoneNumber: null,
+    teamGroup: "",
+    datePicker: "",
+    compliance: false,
+  });
 
   const FormTitle = [
     "Personal Information",
@@ -25,7 +34,7 @@ const Team = () => {
       <Progress colorScheme="green" value={page} max={3} />
       <Container>
         <Heading size="xl" textAlign="center" my={5}>
-          Create Team
+          Create Team Using "useState"
         </Heading>
         <FormControl
           style={{ backgroundColor: "#fff" }}
@@ -38,11 +47,13 @@ const Team = () => {
             {FormTitle[page - 1]}
           </Heading>
           {page === 1 ? (
-            <Step1 />
+            <Step1 formState={formState} setFormState={setFormState} />
           ) : page === 2 ? (
-            <Step2 />
+            <Step2 formState={formState} setFormState={setFormState} />
           ) : (
-            page === 3 && <Step3 />
+            page === 3 && (
+              <Step3 formState={formState} setFormState={setFormState} />
+            )
           )}
           <Box align={"right"} mt={3}>
             <Button
@@ -57,7 +68,7 @@ const Team = () => {
               colorScheme="green"
               onClick={
                 page === 3
-                  ? () => {}
+                  ? () => console.log(formState)
                   : () => setPage((currentPage) => currentPage + 1)
               }
             >
