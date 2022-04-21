@@ -1,63 +1,71 @@
-import { Box, Button, FormLabel, Input } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
+import {
+  Box,
+  Button,
+  Container,
+  FormControl,
+  Heading,
+  Progress,
+} from "@chakra-ui/react";
+import React, { useState } from "react";
 
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import Schema from "../Schema";
+import Step1 from "../pages/Teams/Step1";
+import Step2 from "../pages/Teams/Step2";
+import Step3 from "../pages/Teams/Step3";
 
 const Team = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    mode: "onTouched",
-    resolver: yupResolver(Schema),
-  });
+  const [page, setPage] = useState(1);
 
-  const onSubmit = handleSubmit((data) => console.log(data));
+  const FormTitle = [
+    "Personal Information",
+    "Contact Information",
+    "Choose Team",
+  ];
   return (
     <Box>
-      <Box w={{ base: "100%", sm: "100%", md: "50%", xl: "30%" }}>
-        <form onSubmit={onSubmit}>
-          <FormLabel htmlFor="firstName">First Name</FormLabel>
-          <Input
-            {...register("firstName")}
-            type="text"
-            id="firstName"
-            placeholder="Enter frist name..."
-          />
-          {errors.firstName ? (
-            <span style={{ color: "red" }}>
-              This field is required and minimum of 10 characters
-            </span>
+      <Progress colorScheme="green" value={page} max={3} />
+      <Container>
+        <Heading size="xl" textAlign="center" my={5}>
+          Create Team
+        </Heading>
+        <FormControl
+          style={{ backgroundColor: "#fff" }}
+          colorScheme="blue"
+          borderRadius="xl"
+          boxShadow="md"
+          p={5}
+        >
+          <Heading fontWeight={"medium"} size="md" textAlign="center" mb={3}>
+            {FormTitle[page - 1]}
+          </Heading>
+          {page === 1 ? (
+            <Step1 />
+          ) : page === 2 ? (
+            <Step2 />
           ) : (
-            ""
+            page === 3 && <Step3 />
           )}
-          <FormLabel htmlFor="lastName" mt={3}>
-            Last Name
-          </FormLabel>
-
-          <Input
-            {...register("lastName")}
-            type="text"
-            id="lastName"
-            placeholder="Enter last name..."
-          />
-          {errors.lastName ? (
-            <span style={{ color: "red" }}>This field is required</span>
-          ) : (
-            ""
-          )}
-          <Box float="right">
-            <Button type="submit">Submit</Button>
+          <Box align={"right"} mt={3}>
+            <Button
+              display={page > 1 ? "inline-flex" : "none"}
+              colorScheme="orange"
+              mr={3}
+              onClick={() => setPage((currentPage) => currentPage - 1)}
+            >
+              Previous
+            </Button>
+            <Button
+              colorScheme="green"
+              onClick={
+                page === 3
+                  ? () => {}
+                  : () => setPage((currentPage) => currentPage + 1)
+              }
+            >
+              {page === 3 ? "Submit" : "Next"}
+            </Button>
           </Box>
-        </form>
-      </Box>
-      <Box>
-        <Outlet />
-      </Box>
+        </FormControl>
+      </Container>
     </Box>
   );
 };

@@ -53,7 +53,7 @@ function App() {
               isLogin={isLogin}
               setLogin={setLogin}
             />
-            <Box p={3} h={"100%"} w={"100%"} pos={"absolute"}>
+            <Box p={3} h={"100%"} w={"100%"} bg={"#fafafa"}>
               <Routes>
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/dashboard" element={<Dashboard />} />
