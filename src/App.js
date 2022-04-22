@@ -32,9 +32,8 @@ function App() {
     <Flex h={"100vh"} overflow={"hidden"} pos={"relative"}>
       {isLogin ? (
         <>
-          <QueryClientProvider client={queryClient}>
-            <Sidebar isSidebar={isSidebar} setSidebar={setSidebar} />
-          </QueryClientProvider>
+          <Sidebar isSidebar={isSidebar} setSidebar={setSidebar} />
+
           <Box
             w={"100%"}
             display={{
@@ -58,7 +57,15 @@ function App() {
 
                 {/* Team */}
                 <Route path="/team" element={<Team />} />
-                <Route path="/team/team-list" element={<TeamList />} />
+
+                <Route
+                  path="/team/team-list"
+                  element={
+                    <QueryClientProvider client={queryClient}>
+                      <TeamList />{" "}
+                    </QueryClientProvider>
+                  }
+                />
 
                 <Route path="/calendar" element={<Calendar />} />
                 <Route path="/document" element={<Documents />}>
