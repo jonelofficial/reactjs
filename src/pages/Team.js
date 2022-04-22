@@ -1,20 +1,26 @@
 import {
   Box,
-  Button,
   Container,
   FormControl,
   Heading,
   Progress,
+  useToast,
 } from "@chakra-ui/react";
-import React, { createContext, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Step1 from "../pages/Teams/Step1";
 import Step2 from "../pages/Teams/Step2";
 import Step3 from "../pages/Teams/Step3";
 
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import Schema from "../Schema";
+import { useNavigate } from "react-router-dom";
+
 const Team = () => {
   const [page, setPage] = useState(1);
-  const [formState, setFormState] = useState({
+
+  const initialState = {
     firstName: "",
     lastName: "",
     email: "",
@@ -22,60 +28,90 @@ const Team = () => {
     teamGroup: "",
     datePicker: "",
     compliance: false,
-  });
+  };
+  const [formState, setFormState] = useState(initialState);
 
   const FormTitle = [
     "Personal Information",
     "Contact Information",
     "Choose Team",
   ];
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    mode: "onTouched",
+    resolver: yupResolver(Schema),
+  });
+
+  const navigate = useNavigate();
+  const toast = useToast();
+  const onSubmit = (data) => {
+    toast({
+      title: "Team created.",
+      description: "Done creating team.",
+      status: "success",
+      duration: 9000,
+      isClosable: true,
+      position: "bottom-left",
+    });
+    setFormState({ ...initialState });
+    navigate("/");
+  };
+
   return (
     <Box>
       <Progress colorScheme="green" value={page} max={3} />
       <Container>
         <Heading size="xl" textAlign="center" my={5}>
-          Create Team Using "useState"
+          Create Team
         </Heading>
-        <FormControl
-          style={{ backgroundColor: "#fff" }}
-          colorScheme="blue"
-          borderRadius="xl"
-          boxShadow="md"
-          p={5}
-        >
-          <Heading fontWeight={"medium"} size="md" textAlign="center" mb={3}>
-            {FormTitle[page - 1]}
-          </Heading>
-          {page === 1 ? (
-            <Step1 formState={formState} setFormState={setFormState} />
-          ) : page === 2 ? (
-            <Step2 formState={formState} setFormState={setFormState} />
-          ) : (
-            page === 3 && (
-              <Step3 formState={formState} setFormState={setFormState} />
-            )
-          )}
-          <Box align={"right"} mt={3}>
-            <Button
-              display={page > 1 ? "inline-flex" : "none"}
-              colorScheme="orange"
-              mr={3}
-              onClick={() => setPage((currentPage) => currentPage - 1)}
-            >
-              Previous
-            </Button>
-            <Button
-              colorScheme="green"
-              onClick={
-                page === 3
-                  ? () => console.log(formState)
-                  : () => setPage((currentPage) => currentPage + 1)
-              }
-            >
-              {page === 3 ? "Submit" : "Next"}
-            </Button>
-          </Box>
-        </FormControl>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <FormControl
+            style={{ backgroundColor: "#fff" }}
+            colorScheme="blue"
+            borderRadius="xl"
+            boxShadow="md"
+            p={5}
+          >
+            <Heading fontWeight={"medium"} size="md" textAlign="center" mb={3}>
+              {FormTitle[page - 1]}
+            </Heading>
+            {page === 1 ? (
+              <Step1
+                register={register}
+                errors={errors}
+                formState={formState}
+                setFormState={setFormState}
+                page={page}
+                setPage={setPage}
+              />
+            ) : page === 2 ? (
+              <Step2
+                register={register}
+                errors={errors}
+                formState={formState}
+                setFormState={setFormState}
+                page={page}
+                setPage={setPage}
+              />
+            ) : (
+              page === 3 && (
+                <Step3
+                  register={register}
+                  errors={errors}
+                  formState={formState}
+                  setFormState={setFormState}
+                  page={page}
+                  setPage={setPage}
+                  onSubmit={onSubmit}
+                />
+              )
+            )}
+          </FormControl>
+        </form>
       </Container>
     </Box>
   );

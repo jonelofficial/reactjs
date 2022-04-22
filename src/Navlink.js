@@ -19,19 +19,9 @@ const Navlink = [
     icon: AiOutlineTeam,
     accordion: [
       {
-        name: "Team Red",
+        name: "Team List",
         icon: "",
-        path: "/team/team-red",
-      },
-      {
-        name: "Team Blue",
-        icon: "",
-        path: "/team/team-blue",
-      },
-      {
-        name: "Team Green",
-        icon: "",
-        path: "/team/team-green",
+        path: "/team/team-list",
       },
     ],
     path: "/team",
