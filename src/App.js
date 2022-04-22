@@ -17,9 +17,7 @@ import Docs from "./pages/DocumentsBreadcrumb/Docs";
 import Archive from "./pages/DocumentsBreadcrumb/Archive";
 
 //Team Accordion
-import TeamRed from "./pages/TeamsAccordion/TeamRed";
-import TeamBlue from "./pages/TeamsAccordion/TeamBlue";
-import TeamGreen from "./pages/TeamsAccordion/TeamGreen";
+import TeamList from "./pages/Teams/TeamList";
 
 //React Query
 import { QueryClientProvider, QueryClient } from "react-query";
@@ -60,9 +58,7 @@ function App() {
 
                 {/* Team */}
                 <Route path="/team" element={<Team />} />
-                <Route path="/team/team-red" element={<TeamRed />} />
-                <Route path="/team/team-blue" element={<TeamBlue />} />
-                <Route path="/team/team-green" element={<TeamGreen />} />
+                <Route path="/team/team-list" element={<TeamList />} />
 
                 <Route path="/calendar" element={<Calendar />} />
                 <Route path="/document" element={<Documents />}>
