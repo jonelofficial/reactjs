@@ -14,7 +14,7 @@ import Step3 from "../pages/Teams/Step3";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import Schema from "../Schema";
+import { Schema } from "../Schema";
 import { useNavigate } from "react-router-dom";
 
 const Team = () => {

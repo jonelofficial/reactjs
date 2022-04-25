@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-const Schema = yup.object().shape({
+export const Schema = yup.object().shape({
   firstName: yup
     .string()
     .required("This field is required")
@@ -27,4 +27,7 @@ const Schema = yup.object().shape({
     .oneOf([true], "The terms and conditions must be accepted."),
 });
 
-export default Schema;
+export const loginSchema = yup.object().shape({
+  username: yup.string().required("This field is required"),
+  password: yup.string().required("This field is required"),
+});
