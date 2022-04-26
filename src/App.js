@@ -10,6 +10,7 @@ import Calendar from "./pages/Calendar";
 import Documents from "./pages/Documents";
 import Reports from "./pages/Reports";
 import Login from "./components/Login";
+import userAuth from "./Auth/userAuth";
 
 //Breadcrumbs
 import Home from "./pages/DocumentsBreadcrumb/Home";
@@ -22,15 +23,21 @@ import TeamList from "./pages/Teams/TeamList";
 //React Query
 import { QueryClientProvider, QueryClient } from "react-query";
 
+function setToken(userToken) {}
+function getToken() {}
+
 function App() {
   const queryClient = new QueryClient();
 
   const [isSidebar, setSidebar] = useState(true);
-  const [isLogin, setLogin] = useState(false);
+  // const [isLogin, setLogin] = useState(false);
+
+  // const [token, setToken] = useState({});
+  const token = getToken();
 
   return (
     <Flex h={"100vh"} overflow={"hidden"} pos={"relative"}>
-      {isLogin ? (
+      {token ? (
         <>
           <Sidebar isSidebar={isSidebar} setSidebar={setSidebar} />
 
@@ -44,12 +51,7 @@ function App() {
               xl: "block",
             }}
           >
-            <Header
-              isSidebar={isSidebar}
-              setSidebar={setSidebar}
-              isLogin={isLogin}
-              setLogin={setLogin}
-            />
+            <Header isSidebar={isSidebar} setSidebar={setSidebar} />
             <Box p={3} h={"100%"} w={"100%"} bg={"#fafafa"}>
               <Routes>
                 <Route path="/" element={<Dashboard />} />
@@ -62,7 +64,7 @@ function App() {
                   path="/team/team-list"
                   element={
                     <QueryClientProvider client={queryClient}>
-                      <TeamList />{" "}
+                      <TeamList />
                     </QueryClientProvider>
                   }
                 />
@@ -80,7 +82,9 @@ function App() {
           </Box>
         </>
       ) : (
-        <Login isLogin={isLogin} setLogin={setLogin} />
+        <QueryClientProvider client={queryClient}>
+          <Login token={token} setToken={setToken} />
+        </QueryClientProvider>
       )}
     </Flex>
   );

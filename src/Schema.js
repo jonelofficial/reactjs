@@ -28,6 +28,9 @@ export const Schema = yup.object().shape({
 });
 
 export const loginSchema = yup.object().shape({
-  username: yup.string().required("This field is required"),
+  email: yup
+    .string()
+    .email("Please input a valid email account")
+    .required("This field is required"),
   password: yup.string().required("This field is required"),
 });
