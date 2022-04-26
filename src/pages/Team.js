@@ -49,16 +49,16 @@ const Team = () => {
   const navigate = useNavigate();
   const toast = useToast();
   const onSubmit = (data) => {
-    toast({
-      title: "Team created.",
-      description: "Done creating team.",
-      status: "success",
-      duration: 9000,
-      isClosable: true,
-      position: "bottom-left",
-    });
-    setFormState({ ...initialState });
-    navigate("/");
+    // toast({
+    //   title: "Team created.",
+    //   description: "Done creating team.",
+    //   status: "success",
+    //   duration: 9000,
+    //   isClosable: true,
+    //   position: "bottom-left",
+    // });
+    // setFormState({ ...initialState });
+    // navigate("/");
   };
 
   return (

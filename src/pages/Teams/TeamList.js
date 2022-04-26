@@ -13,7 +13,6 @@ import {
 } from "@chakra-ui/react";
 import React, { useMemo } from "react";
 import { useQuery } from "react-query";
-import { useTable } from "react-table/dist/react-table.development";
 import { getTeams } from "../../api/TeamsAPI";
 
 const TeamList = () => {
@@ -23,7 +22,7 @@ const TeamList = () => {
   if (isError) return <Box>Error</Box>;
 
   return (
-    <Box boxShadow="lg" borderRadius="lg" w="container.lg" m="auto" mt={10}>
+    <Box boxShadow="lg" borderRadius="lg" minW="container.xl" m="auto" mt={10}>
       <TableContainer>
         <Table variant="striped" size="sm">
           <TableCaption>Team Details</TableCaption>
