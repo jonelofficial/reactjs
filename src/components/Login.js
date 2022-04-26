@@ -16,7 +16,7 @@ import { useMutation } from "react-query";
 import { decodeToken } from "react-jwt";
 import { useNavigate } from "react-router-dom";
 
-const Login = ({ token, setToken }) => {
+const Login = ({ setToken }) => {
   //POST login data to api
   const {
     mutateAsync,
@@ -44,11 +44,8 @@ const Login = ({ token, setToken }) => {
 
   if (isSuccess) {
     const myDecodedToken = decodeToken(JSON.stringify(mutateData.accessToken));
-    localStorage.setItem("token", JSON.stringify(myDecodedToken));
+    setToken(myDecodedToken);
   }
-
-  // RETRIEVE
-  // const user = JSON.parse(localStorage.getItem('token'));
 
   return (
     <Box w={"100%"}>
@@ -83,12 +80,7 @@ const Login = ({ token, setToken }) => {
             </FormHelperText>
 
             <Box mt={6} textAlign="end">
-              <Button
-                isLoading={isLoading}
-                type="submit"
-                colorScheme="purple"
-                // onSubmit={!errors.username && !errors.password ? loginke() : ""}
-              >
+              <Button isLoading={isLoading} type="submit" colorScheme="purple">
                 Login
               </Button>
             </Box>

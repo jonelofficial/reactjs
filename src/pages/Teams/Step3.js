@@ -103,7 +103,7 @@ const Step3 = ({
           }
           colorScheme="green"
           type={page === 3 ? "submit" : "button"}
-          onClick={page === 3 ? () => onSubmit() : ""}
+          onClick={page === 3 ? () => onSubmit() : console.log("test")}
         >
           {page === 3 ? "Submit" : "Next"}
         </Button>

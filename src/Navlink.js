@@ -23,11 +23,6 @@ const Navlink = [
         icon: "",
         path: "/team/team-list",
       },
-      {
-        name: "Pending",
-        icon: "",
-        path: "/",
-      },
     ],
     path: "/team",
     id: "2",
