@@ -13,6 +13,7 @@ const Navlink = [
     accordion: {},
     path: "/",
     id: "1",
+    defaultShow: true,
   },
   {
     name: "Teams",
@@ -26,6 +27,7 @@ const Navlink = [
     ],
     path: "/team",
     id: "2",
+    defaultShow: false,
   },
   {
     name: "Calendar",
@@ -33,20 +35,23 @@ const Navlink = [
     accordion: {},
     path: "/calendar",
     id: "3",
+    defaultShow: true,
   },
   {
-    name: "Documents",
+    name: "Requester",
     icon: AiOutlineFilePdf,
     accordion: {},
     path: "/document",
     id: "4",
+    defaultShow: false,
   },
   {
-    name: "Reports",
+    name: "Support",
     icon: AiOutlineBarChart,
     accordion: {},
     path: "/report",
     id: "5",
+    defaultShow: false,
   },
 ];
 export default Navlink;

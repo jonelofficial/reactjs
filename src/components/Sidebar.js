@@ -1,15 +1,14 @@
-import { Box, CloseButton, Flex } from "@chakra-ui/react";
-import React from "react";
+import { Box, CloseButton, Flex, Text } from "@chakra-ui/react";
+import React, { useState } from "react";
 import AccordionSidebar from "../components/Sidebar/AccordionSidebar";
 import SingleSidebar from "../components/Sidebar/SingleSidebar";
 
 import "../App.css";
 import Navlink from "../Navlink";
 
-const Sidebar = ({ isSidebar, setSidebar }) => {
+const Sidebar = ({ isSidebar, setSidebar, token }) => {
   return (
     <Box
-      // display={isSidebar ? "block" : "none"}
       bg={"primary"}
       boxShadow={"2xl"}
       transition={"width .3s"}
@@ -31,8 +30,8 @@ const Sidebar = ({ isSidebar, setSidebar }) => {
           </Flex>
         </Box>
         <Box px={3}>
-          {Navlink.map(({ name, accordion, icon, path }, index) =>
-            accordion.length ? (
+          {Navlink.map(({ name, accordion, icon, path, defaultShow }, index) =>
+            defaultShow && accordion.length ? (
               <AccordionSidebar
                 key={index}
                 name={name}
@@ -41,7 +40,39 @@ const Sidebar = ({ isSidebar, setSidebar }) => {
                 path={path}
               />
             ) : (
-              <SingleSidebar key={index} name={name} icon={icon} path={path} />
+              defaultShow &&
+              !accordion.length && (
+                <SingleSidebar
+                  key={index}
+                  name={name}
+                  icon={icon}
+                  path={path}
+                />
+              )
+            )
+          )}
+
+          {Navlink.map(({ name, accordion, icon, path, defaultShow }, index) =>
+            token.priviledge.map((index) =>
+              index === name.toUpperCase() && accordion.length ? (
+                <AccordionSidebar
+                  key={index}
+                  name={name}
+                  accordion={accordion}
+                  icon={icon}
+                  path={path}
+                />
+              ) : (
+                index === name.toUpperCase() &&
+                !accordion.length && (
+                  <SingleSidebar
+                    key={index}
+                    name={name}
+                    icon={icon}
+                    path={path}
+                  />
+                )
+              )
             )
           )}
         </Box>

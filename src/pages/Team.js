@@ -6,7 +6,7 @@ import {
   Progress,
   useToast,
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import Step1 from "../pages/Teams/Step1";
 import Step2 from "../pages/Teams/Step2";
@@ -16,9 +16,13 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Schema } from "../Schema";
 import { useNavigate } from "react-router-dom";
+import { useMutation } from "react-query";
+import { createTeam } from "../api/TeamsAPI";
 
 const Team = () => {
   const [page, setPage] = useState(1);
+
+  const { mutateAsync, isLoading } = useMutation(createTeam);
 
   const initialState = {
     firstName: "",
@@ -48,17 +52,23 @@ const Team = () => {
 
   const navigate = useNavigate();
   const toast = useToast();
-  const onSubmit = (data) => {
-    // toast({
-    //   title: "Team created.",
-    //   description: "Done creating team.",
-    //   status: "success",
-    //   duration: 9000,
-    //   isClosable: true,
-    //   position: "bottom-left",
-    // });
-    // setFormState({ ...initialState });
-    // navigate("/");
+  const onSubmit = async () => {
+    try {
+      const result = await mutateAsync(formState);
+      if (result) {
+        toast({
+          title: "Team created.",
+          description: "Done creating team.",
+          status: "success",
+          duration: 9000,
+          isClosable: true,
+          position: "bottom-left",
+        });
+        navigate("/team/team-list");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -107,6 +117,7 @@ const Team = () => {
                   page={page}
                   setPage={setPage}
                   onSubmit={onSubmit}
+                  isLoading={isLoading}
                 />
               )
             )}

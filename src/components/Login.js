@@ -13,8 +13,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../Schema";
 import { getUsers } from "../api/LoginAPI";
 import { useMutation } from "react-query";
-import { decodeToken } from "react-jwt";
-import { useNavigate } from "react-router-dom";
+import useToken from "../Auth/useToken";
 
 const Login = ({ setToken }) => {
   //POST login data to api
@@ -43,8 +42,7 @@ const Login = ({ setToken }) => {
   }
 
   if (isSuccess) {
-    const myDecodedToken = decodeToken(JSON.stringify(mutateData.accessToken));
-    setToken(myDecodedToken);
+    setToken(mutateData.accessToken);
   }
 
   return (

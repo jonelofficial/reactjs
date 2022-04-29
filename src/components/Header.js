@@ -10,7 +10,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { AiOutlineLogout } from "react-icons/ai";
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Header = ({ isSidebar, setSidebar, token }) => {
@@ -43,6 +43,7 @@ const Header = ({ isSidebar, setSidebar, token }) => {
 
         <Flex alignItems={"center"}>
           <Text
+            display={["none", "block", "block", "block"]}
             fontSize={{ base: "lg", md: "xl" }}
             fontWeight={"bold"}
             color={"#fff"}
@@ -55,6 +56,14 @@ const Header = ({ isSidebar, setSidebar, token }) => {
               <Avatar src="https://bit.ly/dan-abramov" />
             </MenuButton>
             <MenuList>
+              <Text
+                display={["block", "none", "none", "none"]}
+                fontSize={{ base: "lg", md: "xl" }}
+                fontWeight={"bold"}
+                px={3}
+              >
+                {`Hello ${token.firstName}`}
+              </Text>
               <MenuItem icon={<SettingsIcon />}>Setting</MenuItem>
               <MenuItem icon={<AiOutlineLogout />} onClick={handleLogout}>
                 Logout

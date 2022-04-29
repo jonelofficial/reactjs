@@ -1,16 +1,20 @@
 import { useState } from "react";
+import { decodeToken } from "react-jwt";
 
 const useToken = () => {
   const getToken = () => {
     const userToken = JSON.parse(localStorage.getItem("token"));
-    return userToken;
+    const myDecodedToken = decodeToken(JSON.stringify(userToken));
+    return myDecodedToken;
   };
 
   const [token, setToken] = useState(getToken());
 
   const saveToken = (userToken) => {
     localStorage.setItem("token", JSON.stringify(userToken));
-    setToken(userToken, token);
+    const userTokens = JSON.parse(localStorage.getItem("token"));
+    const myDecodedToken = decodeToken(JSON.stringify(userTokens));
+    setToken(myDecodedToken, token);
   };
   return {
     setToken: saveToken,
