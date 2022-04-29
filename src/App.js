@@ -59,7 +59,14 @@ function App() {
         <Box p={3} h={"100%"} w={"100%"} bg={"#fafafa"}>
           <Routes>
             <Route path="/" element={<Dashboard />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route
+              path="/dashboard"
+              element={
+                <QueryClientProvider client={queryClient}>
+                  <Dashboard />
+                </QueryClientProvider>
+              }
+            />
             <Route path="/calendar" element={<Calendar />} />
 
             {token.priviledge.includes("TEAMS") ? (
