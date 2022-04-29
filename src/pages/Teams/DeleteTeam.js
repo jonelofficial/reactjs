@@ -71,6 +71,7 @@ const DeleteTeam = ({
           </Button>
         </Td>
       </Tr>
+
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
         <ModalContent>

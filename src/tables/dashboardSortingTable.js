@@ -10,11 +10,11 @@ import {
   Tr,
 } from "@chakra-ui/react";
 import React, { useMemo } from "react";
-import { useTable, useSortBy } from "react-table/dist/react-table.development";
+import { useTable } from "react-table/dist/react-table.development";
 import { COLUMNS, GROUPED_COLUMNS } from "../tables/dashboardTableColumns";
 import { DATA } from "../tables/dashboardTableData";
 
-const Dashboard = () => {
+const dashboardSortingTable = () => {
   const columns = useMemo(() => COLUMNS, []);
   const data = useMemo(() => DATA, []);
   const {
@@ -24,7 +24,7 @@ const Dashboard = () => {
     rows,
     prepareRow,
     footerGroups,
-  } = useTable({ columns, data }, useSortBy);
+  } = useTable({ columns, data });
 
   return (
     <Box
@@ -45,15 +45,8 @@ const Dashboard = () => {
             {headerGroups.map((headerGroup) => (
               <Tr {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map((column) => (
-                  <Th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                  <Th {...column.getHeaderProps()}>
                     {column.render("Header")}
-                    <span>
-                      {column.isSorted
-                        ? column.isSortedDesc
-                          ? "🔽"
-                          : "🔼"
-                        : ""}
-                    </span>
                   </Th>
                 ))}
               </Tr>
@@ -88,4 +81,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default dashboardSortingTable;
