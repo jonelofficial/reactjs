@@ -20,6 +20,7 @@ const Step3 = ({
   page,
   setPage,
   onSubmit,
+  isLoading,
 }) => {
   const { teamGroup, datePicker, compliance } = formState;
   const dateToday = new Date();
@@ -54,11 +55,15 @@ const Step3 = ({
       <FormLabel mt={3}>Date:</FormLabel>
       <DatePicker
         {...register("datePicker")}
+        todayButton="Today"
+        dateFormat="MM/dd/yyyy"
+        isClearable
+        placeholderText="Add date"
         id="datePicker"
         className="datePicker"
         selected={datePicker == "" ? startDate : datePicker}
         minDate={dateToday}
-        onChange={(date: Date) => {
+        onChange={(date) => {
           setStartDate(date);
           setFormState({ ...formState, datePicker: date });
         }}
@@ -96,6 +101,7 @@ const Step3 = ({
           Previous
         </Button>
         <Button
+          isLoading={isLoading}
           isDisabled={
             teamGroup === "" || datePicker === "" || compliance === false
               ? true
