@@ -1,16 +1,25 @@
 import {
   Box,
+  Button,
+  Select,
   Table,
   TableContainer,
   Tbody,
   Td,
+  Text,
   Tfoot,
   Th,
   Thead,
   Tr,
 } from "@chakra-ui/react";
 import React, { useMemo } from "react";
-import { useTable, useSortBy } from "react-table/dist/react-table.development";
+import {
+  useTable,
+  useGlobalFilter,
+  useSortBy,
+  usePagination,
+} from "react-table/dist/react-table.development";
+import { GlobalFilter } from "../components/GlobalFilter";
 import { COLUMNS, GROUPED_COLUMNS } from "../tables/dashboardTableColumns";
 import { DATA } from "../tables/dashboardTableData";
 
@@ -21,10 +30,21 @@ const Dashboard = () => {
     getTableProps,
     getTableBodyProps,
     headerGroups,
-    rows,
+    page,
+    nextPage,
+    previousPage,
+    canPreviousPage,
+    canNextPage,
+    pageOptions,
+    gotoPage,
+    pageCount,
+    setPageSize,
     prepareRow,
-    footerGroups,
-  } = useTable({ columns, data }, useSortBy);
+    state,
+    setGlobalFilter,
+  } = useTable({ columns, data }, useGlobalFilter, useSortBy, usePagination);
+
+  const { globalFilter, pageIndex, pageSize } = state;
 
   return (
     <Box
@@ -34,6 +54,7 @@ const Dashboard = () => {
       maxW="container.xl"
       overflow="auto"
     >
+      <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
       <TableContainer>
         <Table
           variant="striped"
@@ -60,10 +81,10 @@ const Dashboard = () => {
             ))}
           </Thead>
           <Tbody {...getTableBodyProps()}>
-            {rows.map((row) => {
+            {page.map((row) => {
               prepareRow(row);
               return (
-                <Tr {...row.getRowProps()}>
+                <Tr {...row.getRowProps()} key={row.id}>
                   {row.cells.map((cell) => {
                     return (
                       <Td {...cell.getCellProps()}>{cell.render("Cell")}</Td>
@@ -73,16 +94,40 @@ const Dashboard = () => {
               );
             })}
           </Tbody>
-          <Tfoot>
-            {footerGroups.map((footerGroup) => (
-              <Tr {...footerGroup.getFooterGroupProps()}>
-                {footerGroup.headers.map((column) => (
-                  <Th {...column.getFooterProps}>{column.render("Footer")}</Th>
-                ))}
-              </Tr>
-            ))}
-          </Tfoot>
         </Table>
+        <Select
+          defaultValue={pageSize}
+          onChange={(e) => setPageSize(Number(e.target.value))}
+        >
+          {[10, 25, 50].map((pageSize) => (
+            <option key={pageSize} value={pageSize}>
+              {pageSize}
+            </option>
+          ))}
+        </Select>
+        <Button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+          {"<<"}
+        </Button>
+        <Button
+          disabled={!canPreviousPage}
+          colorScheme="orange"
+          onClick={() => previousPage()}
+        >
+          Previous
+        </Button>
+        <Text>
+          Page {pageIndex + 1} out of {pageCount}
+        </Text>
+        <Button
+          disabled={!canNextPage}
+          colorScheme="blue"
+          onClick={() => nextPage()}
+        >
+          Next
+        </Button>
+        <Button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+          {">>"}
+        </Button>
       </TableContainer>
     </Box>
   );
