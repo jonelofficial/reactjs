@@ -26,6 +26,7 @@ import { QueryClientProvider, QueryClient } from "react-query";
 import PageNotFound from "./components/PageNotFound";
 
 import { decodeToken } from "react-jwt";
+import DashboardDelete from "./pages/Dashboard/DashboardDelete";
 
 function App() {
   const queryClient = new QueryClient();
@@ -36,7 +37,7 @@ function App() {
     return (
       <QueryClientProvider client={queryClient}>
         <Flex h={"100vh"} overflow={"hidden"}>
-          <Login setToken={setToken} />
+          <Login setToken={setToken} token={token} />
         </Flex>
       </QueryClientProvider>
     );
@@ -58,12 +59,27 @@ function App() {
         <Header isSidebar={isSidebar} setSidebar={setSidebar} token={token} />
         <Box p={3} h={"100%"} w={"100%"} bg={"#fafafa"}>
           <Routes>
-            <Route path="/" element={<Dashboard />} />
+            <Route
+              path="/"
+              element={
+                <QueryClientProvider client={queryClient}>
+                  <Dashboard />
+                </QueryClientProvider>
+              }
+            />
             <Route
               path="/dashboard"
               element={
                 <QueryClientProvider client={queryClient}>
                   <Dashboard />
+                </QueryClientProvider>
+              }
+            />
+            <Route
+              path="/dashboard/delete/:id"
+              element={
+                <QueryClientProvider client={queryClient}>
+                  <DashboardDelete />
                 </QueryClientProvider>
               }
             />
