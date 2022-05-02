@@ -1,23 +1,23 @@
-import { Flex, Input, Text } from "@chakra-ui/react";
+import { Box, Flex, Input, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useAsyncDebounce } from "react-table";
 
 export const GlobalFilter = ({ filter, setFilter }) => {
+  const [value, setValue] = useState(filter);
 
-    const [value, setValue] = useState(filter)
-
-    const onChange = useAsyncDebounce(value=> {
-        setFilter(value||undefined)
-    },300)
+  const onChange = useAsyncDebounce((value) => {
+    setFilter(value || undefined);
+  }, 200);
   return (
-    <Flex>
-      <Text>Search</Text>
+    <Flex alignItems="center">
+      <Text pr="3">Search:</Text>
       <Input
+        w="20em"
         type="text"
-        defaultValue={value || " "}
+        defaultValue={value || null}
         onChange={(e) => {
-            // setFilter(e.target.value)
-        onChange(e.target.value)
+          setFilter(e.target.value);
+          // onChange(e.target.value);
         }}
       />
     </Flex>
