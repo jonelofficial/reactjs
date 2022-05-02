@@ -1,7 +1,7 @@
 import { Box, Flex } from "@chakra-ui/react";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import Dashboard from "./pages/Dashboard";
@@ -18,15 +18,14 @@ import Docs from "./pages/DocumentsBreadcrumb/Docs";
 import Archive from "./pages/DocumentsBreadcrumb/Archive";
 
 //Team Accordion
-import TeamList from "./pages/Teams/TeamList";
 import EditTeam from "./pages/Teams/EditTeam";
 
 //React Query
 import { QueryClientProvider, QueryClient } from "react-query";
 import PageNotFound from "./components/PageNotFound";
 
-import { decodeToken } from "react-jwt";
 import DashboardDelete from "./pages/Dashboard/DashboardDelete";
+import GetTeam from "./pages/Teams/GetTeam";
 
 function App() {
   const queryClient = new QueryClient();
@@ -103,7 +102,7 @@ function App() {
                 path="/team/team-list"
                 element={
                   <QueryClientProvider client={queryClient}>
-                    <TeamList />
+                    <GetTeam />
                   </QueryClientProvider>
                 }
               >
