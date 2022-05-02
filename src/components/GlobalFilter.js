@@ -10,7 +10,9 @@ export const GlobalFilter = ({ filter, setFilter }) => {
   }, 200);
   return (
     <Flex alignItems="center">
-      <Text pr="3">Search:</Text>
+      <Text pr="3" fontWeight="bold">
+        Search:
+      </Text>
       <Input
         w="20em"
         type="text"
