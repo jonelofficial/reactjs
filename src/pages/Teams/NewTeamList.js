@@ -22,6 +22,7 @@ import {
 } from "react-table/dist/react-table.development";
 import { AddIcon } from "@chakra-ui/icons";
 import { GlobalFilter } from "../../components/GlobalFilter";
+import { Link } from "react-router-dom";
 
 const NewTeamList = ({ TEAMDATA }) => {
   const columns = useMemo(() => COLUMNS, []);
@@ -52,9 +53,12 @@ const NewTeamList = ({ TEAMDATA }) => {
   return (
     <>
       <Flex justifyContent="space-between" mb="3">
-        <Button leftIcon={<AddIcon />} colorScheme="green" variant="solid">
-          Create User
-        </Button>
+        <Link to="/team">
+          <Button leftIcon={<AddIcon />} colorScheme="green" variant="solid">
+            Create User
+          </Button>
+        </Link>
+
         <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
       </Flex>
 

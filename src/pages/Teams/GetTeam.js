@@ -1,6 +1,7 @@
 import { Box, Center, Spinner } from "@chakra-ui/react";
 import React from "react";
 import { useQuery } from "react-query";
+import { Outlet } from "react-router-dom";
 import { getTeams } from "../../api/TeamsAPI";
 import NewTeamList from "./NewTeamList";
 
@@ -27,7 +28,12 @@ const GetTeam = () => {
     );
   }
   if (isSuccess) {
-    return <NewTeamList TEAMDATA={data} />;
+    return (
+      <>
+        <NewTeamList TEAMDATA={data} />
+        <Outlet />
+      </>
+    );
   }
 };
 
