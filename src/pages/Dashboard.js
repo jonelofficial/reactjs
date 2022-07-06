@@ -1,9 +1,9 @@
-import { Box, Center, Spinner } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import React from "react";
-import { useQuery } from "react-query";
+// import { useQuery } from "react-query";
 
-import { getTeams } from "../api/TeamsAPI";
-import DashboardTeamList from "./Dashboard/DashboardTeamList";
+// import { getTeams } from "../api/TeamsAPI";
+// import DashboardTeamList from "./Dashboard/DashboardTeamList";
 
 const Dashboard = () => {
   // const { data, isLoading, isError, isSuccess } = useQuery("teams", getTeams);

@@ -26,6 +26,7 @@ export const createTeam = async (data) => {
 
 // Get
 export const getTeam = async ({ queryKey }) => {
+  console.log(queryKey);
   const [_key, { id }] = queryKey;
   const response = await fetch(`${baseUrl}/${id}`);
   if (!response.ok) {

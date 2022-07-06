@@ -22,8 +22,8 @@ const Login = ({ setToken, token }) => {
   const {
     mutateAsync,
     isLoading,
-    isSuccess,
     isError,
+    isSuccess,
     data: mutateData,
   } = useMutation(getUsers);
 
@@ -36,17 +36,17 @@ const Login = ({ setToken, token }) => {
 
   // Handle form submit
   const onSubmit = async (data) => {
-    // await mutateAsync(data);
-    localStorage.setItem(
-      "token",
-      JSON.stringify(
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FjdGl2ZSI6dHJ1ZSwicHJpdmlsZWRnZSI6WyJDUkVBVEUgVElDS0VUIiwiUkVRVUVTVEVSIiwiREVQQVJUTUVOVCIsIk1FTUJFUlMiLCJURUFNUyIsIkNBVEVHT1JZIiwiQ0hBTk5FTFMiXSwiX2lkIjoiNjI0ZDM0OTBkZTljNmMyMDY0ZGNmODYzIiwiZmlyc3ROYW1lIjoiSm9uZWwiLCJsYXN0TmFtZSI6Ik1hbmFsbyIsImRlcGFydG1lbnRJZCI6IjYyNGQzMjgwZGU5YzZjMjA2NGRjZjgyZSIsInVuaXRJZCI6IjYyNGQzNDc1ZGU5YzZjMjA2NGRjZjg1YyIsImVtYWlsIjoianVkZUBnbWFpbC5jb20iLCJjcmVhdGVkQXQiOiIyMDIyLTA0LTA2VDA2OjM0OjU2LjUyNFoiLCJ1cGRhdGVkQXQiOiIyMDIyLTA0LTA2VDA2OjM0OjU2LjUyNFoiLCJfX3YiOjAsInNlc3Npb24iOiI2MjY4ZjY5ZjE2ZmI0MTQ4NDgwMmI3ODUiLCJpYXQiOjE2NTEwNDYwNDcsImV4cCI6MTY1MTA3NDg0N30.hshIdjhW93ucMoZdNV6xnEKOY_X4m05inANsbno9Zsk"
-      )
-    );
-    const userTokens = JSON.parse(localStorage.getItem("token"));
-    const myDecodedToken = decodeToken(JSON.stringify(userTokens));
-    setToken(userTokens);
-    console.log(myDecodedToken);
+    const result = await mutateAsync(data);
+    // localStorage.setItem(
+    //   "token",
+    //   JSON.stringify(
+    //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FjdGl2ZSI6dHJ1ZSwicHJpdmlsZWRnZSI6WyJDUkVBVEUgVElDS0VUIiwiUkVRVUVTVEVSIiwiREVQQVJUTUVOVCIsIk1FTUJFUlMiLCJURUFNUyIsIkNBVEVHT1JZIiwiQ0hBTk5FTFMiXSwiX2lkIjoiNjI0ZDM0OTBkZTljNmMyMDY0ZGNmODYzIiwiZmlyc3ROYW1lIjoiSm9uZWwiLCJsYXN0TmFtZSI6Ik1hbmFsbyIsImRlcGFydG1lbnRJZCI6IjYyNGQzMjgwZGU5YzZjMjA2NGRjZjgyZSIsInVuaXRJZCI6IjYyNGQzNDc1ZGU5YzZjMjA2NGRjZjg1YyIsImVtYWlsIjoianVkZUBnbWFpbC5jb20iLCJjcmVhdGVkQXQiOiIyMDIyLTA0LTA2VDA2OjM0OjU2LjUyNFoiLCJ1cGRhdGVkQXQiOiIyMDIyLTA0LTA2VDA2OjM0OjU2LjUyNFoiLCJfX3YiOjAsInNlc3Npb24iOiI2MjY4ZjY5ZjE2ZmI0MTQ4NDgwMmI3ODUiLCJpYXQiOjE2NTEwNDYwNDcsImV4cCI6MTY1MTA3NDg0N30.hshIdjhW93ucMoZdNV6xnEKOY_X4m05inANsbno9Zsk"
+    //   )
+    // );
+    // const userTokens = JSON.parse(localStorage.getItem("token"));
+    // const myDecodedToken = decodeToken(JSON.stringify(userTokens));
+    // setToken(userTokens);
+    // console.log(myDecodedToken);
   };
 
   if (isError) {
@@ -54,7 +54,8 @@ const Login = ({ setToken, token }) => {
   }
 
   if (isSuccess) {
-    // setToken(mutateData.accessToken);
+    setToken(mutateData.accessToken);
+    console.log(mutateData);
   }
 
   return (

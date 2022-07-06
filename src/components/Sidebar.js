@@ -1,4 +1,11 @@
-import { Box, CloseButton, Flex, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  CloseButton,
+  Flex,
+  Text,
+  useColorMode,
+} from "@chakra-ui/react";
 import React, { useState } from "react";
 import AccordionSidebar from "../components/Sidebar/AccordionSidebar";
 import SingleSidebar from "../components/Sidebar/SingleSidebar";
@@ -7,6 +14,7 @@ import "../App.css";
 import Navlink from "../Navlink";
 
 const Sidebar = ({ isSidebar, setSidebar, token }) => {
+  const { colorMode, toggleColorMode } = useColorMode();
   return (
     <Box
       bg={"primary"}
@@ -22,7 +30,10 @@ const Sidebar = ({ isSidebar, setSidebar, token }) => {
     >
       <Box display={isSidebar ? "block" : "none"}>
         <Box p={3}>
-          <Flex justify={"end"} alignItems={"center"}>
+          <Flex justifyContent="space-between" alignItems={"center"}>
+            <Button onClick={toggleColorMode}>
+              Toggle {colorMode === "light" ? "Dark" : "Light"}
+            </Button>
             <CloseButton
               onClick={() => setSidebar(!isSidebar)}
               color={"sidebarText"}

@@ -52,7 +52,7 @@ export const COLUMNS = [
       // To refetch table data
       const queryClient = useQueryClient();
       // To process deleting
-      const { mutateAsync, isLoading, isError } = useMutation(removeTeam);
+      const { mutateAsync, isLoading } = useMutation(removeTeam);
       // For messaging
       const toast = useToast();
       // Function handle remove data
@@ -89,11 +89,11 @@ export const COLUMNS = [
         <>
           <Flex>
             <Link to={`/team/team-list/edit-team/${props.row.original.id}`}>
-              <Button colorScheme="teal" mr="3">
+              <Button colorScheme="teal" mr="3" size="xs">
                 Edit
               </Button>
             </Link>
-            <Button colorScheme="red" onClick={onOpen}>
+            <Button colorScheme="red" onClick={onOpen} size="xs">
               Delete
             </Button>
           </Flex>
@@ -104,7 +104,7 @@ export const COLUMNS = [
               <ModalHeader textAlign="center">Are you sure?</ModalHeader>
               <ModalCloseButton />
               <ModalBody>
-                Do you really want to delete {props.row.original.firstName}
+                Do you really want to delete {props.row.original.firstName}{" "}
                 records? This process cannot be undone.
               </ModalBody>
 

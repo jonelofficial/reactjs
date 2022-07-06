@@ -28,7 +28,13 @@ import DashboardDelete from "./pages/Dashboard/DashboardDelete";
 import GetTeam from "./pages/Teams/GetTeam";
 
 function App() {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+      },
+    },
+  });
   const { token, setToken } = useToken();
   const [isSidebar, setSidebar] = useState();
 
@@ -56,7 +62,7 @@ function App() {
         }}
       >
         <Header isSidebar={isSidebar} setSidebar={setSidebar} token={token} />
-        <Box p={3} h={"100%"} w={"100%"} bg={"#fafafa"}>
+        <Box p={3} h={"100%"} w={"100%"}>
           <Routes>
             <Route
               path="/"

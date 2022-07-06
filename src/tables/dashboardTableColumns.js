@@ -97,7 +97,7 @@ export const COLUMNS = [
               <ModalHeader textAlign="center">Are you sure?</ModalHeader>
               <ModalCloseButton />
               <ModalBody>
-                Do you really want to delete {props.row.original.firstName}{" "}
+                Do you really want to delete {props.row.original.firstName}
                 records? This process cannot be undone.
               </ModalBody>
 

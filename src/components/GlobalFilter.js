@@ -1,5 +1,4 @@
 import {
-  Box,
   CloseButton,
   Flex,
   Input,
@@ -8,7 +7,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { useAsyncDebounce } from "react-table";
+// import { useAsyncDebounce } from "react-table";
 
 export const GlobalFilter = ({ filter, setFilter }) => {
   const [value, setValue] = useState("");
@@ -18,12 +17,12 @@ export const GlobalFilter = ({ filter, setFilter }) => {
     setFilter(null);
   };
 
-  const onChange = useAsyncDebounce((value) => {
-    setFilter(value || undefined);
-  }, 200);
+  // const onChange = useAsyncDebounce((value) => {
+  //   setFilter(value || undefined);
+  // }, 200);
   return (
     <Flex alignItems="center">
-      <Text pr="3" fontWeight="bold">
+      <Text pr="3" fontWeight="bold" w="80px">
         Search:
       </Text>
 

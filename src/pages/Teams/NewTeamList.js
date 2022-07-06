@@ -132,6 +132,7 @@ const NewTeamList = ({ TEAMDATA }) => {
           variant="outline"
           onClick={() => gotoPage(0)}
           disabled={!canPreviousPage}
+          size="sm"
         >
           {"<< Go To First Page"}
         </Button>
@@ -141,6 +142,7 @@ const NewTeamList = ({ TEAMDATA }) => {
           colorScheme="orange"
           variant="solid"
           mr="3"
+          size="sm"
         >
           Previous
         </Button>
@@ -149,6 +151,7 @@ const NewTeamList = ({ TEAMDATA }) => {
           disabled={!canNextPage}
           colorScheme="blue"
           variant="solid"
+          size="sm"
         >
           Next
         </Button>
@@ -158,6 +161,7 @@ const NewTeamList = ({ TEAMDATA }) => {
           variant="outline"
           onClick={() => gotoPage(pageCount - 1)}
           disabled={!canNextPage}
+          size="sm"
         >
           {"Go To Last Page>>"}
         </Button>

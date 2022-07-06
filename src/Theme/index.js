@@ -15,6 +15,10 @@ const theme = extendTheme({
     heading: `Montserrat , ${base}`,
     body: "",
   },
+  config: {
+    initialColorMode: "light",
+    useSystemColorMode: false,
+  },
 });
 
 export default theme;
